@@ -48,13 +48,13 @@
               var a = v.split("=");
               query[a[0]] = a.slice(1).join("=").replace(/~and~/g, "&");
             });
-          if (query.redirect_path !== undefined) {
+          if (query.spa_path !== undefined) {
             window.history.replaceState(
               null,
               null,
               location.pathname.slice(0, -1) +
-                (query.redirect_path || "") +
-                (query.state ? "?" + query.state : "") +
+                (query.spa_path || "") +
+                (query.spa_state ? "?" + query.spa_state : "") +
                 location.hash
             );
           }

@@ -35,7 +35,7 @@
       // string into just a query string, and then redirects the browser
       // to the new url with only a query string and hash fragment,
       // e.g. http://www.foo.tld/one/two?a=b&c=d#qwe, becomes
-      // http://www.foo.tld/?redirect_path=/one/two&state=a=b~and~c=d#qwe
+      // http://www.foo.tld/?spa_path=/one/two&spa_state=a=b~and~c=d#qwe
       // Note: this 404.html file must be at least 512 bytes for it to work
       // with Internet Explorer (it is currently > 512 bytes)
 
@@ -44,7 +44,7 @@
       // This way the code will only replace the route part of the path, and not
       // the real directory in which the app resides, for example:
       // https://username.github.io/repo-name/one/two?a=b&c=d#qwe becomes
-      // https://username.github.io/repo-name/?redirect_path=/one/two&state=a=b~and~c=d#qwe
+      // https://username.github.io/repo-name/?spa_path=/one/two&spa_state=a=b~and~c=d#qwe
       // Otherwise, leave segmentCount as 0.
       var segmentCount = 0;
 
@@ -58,7 +58,7 @@
             .split("/")
             .slice(0, 1 + segmentCount)
             .join("/") +
-          "/?redirect_path=/" +
+          "/?spa_path=/" +
           location.pathname
             .slice(1)
             .split("/")
@@ -66,7 +66,7 @@
             .join("/")
             .replace(/&/g, "~and~") +
           (location.search
-            ? "&state=" + location.search.slice(1).replace(/&/g, "~and~")
+            ? "&spa_state=" + location.search.slice(1).replace(/&/g, "~and~")
             : "") +
           location.hash
       );
